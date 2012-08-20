@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_youtube-tutorials" default="compile.module.youtube-tutorials">
+  <dirname property="module.youtube-tutorials.basedir" file="${ant.file.module_youtube-tutorials}"/>
+  
+  
+  <property name="compiler.args.youtube-tutorials" value="${compiler.args}"/>
+  
+  <property name="youtube-tutorials.output.dir" value="${module.youtube-tutorials.basedir}/out/production/Youtube-Tutorials"/>
+  <property name="youtube-tutorials.testoutput.dir" value="${module.youtube-tutorials.basedir}/out/test/Youtube-Tutorials"/>
+  
+  <path id="youtube-tutorials.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="youtube-tutorials.module.production.classpath">
+    <pathelement location="${basedir}/lib/jbox2d-library-2.1.2.2.jar"/>
+    <pathelement location="${basedir}/lib/jbullet.jar"/>
+    <pathelement location="${basedir}/lib/jdom-1.1.2.jar"/>
+    <pathelement location="${basedir}/lib/jinput.jar"/>
+    <pathelement location="${basedir}/lib/lwjgl.jar"/>
+    <pathelement location="${basedir}/lib/lwjgl_util.jar"/>
+    <pathelement location="${basedir}/lib/PNGDecoder.jar"/>
+    <pathelement location="${basedir}/lib/slf4j-api-1.6.6.jar"/>
+    <pathelement location="${basedir}/lib/slf4j-simple-1.6.6.jar"/>
+    <pathelement location="${basedir}/lib/slick-util.jar"/>
+    <pathelement location="${basedir}/lib/slick.jar"/>
+  </path>
+  
+  <path id="youtube-tutorials.runtime.production.module.classpath">
+    <pathelement location="${youtube-tutorials.output.dir}"/>
+    <pathelement location="${basedir}/lib/jbox2d-library-2.1.2.2.jar"/>
+    <pathelement location="${basedir}/lib/jbullet.jar"/>
+    <pathelement location="${basedir}/lib/jdom-1.1.2.jar"/>
+    <pathelement location="${basedir}/lib/jinput.jar"/>
+    <pathelement location="${basedir}/lib/lwjgl.jar"/>
+    <pathelement location="${basedir}/lib/lwjgl_util.jar"/>
+    <pathelement location="${basedir}/lib/PNGDecoder.jar"/>
+    <pathelement location="${basedir}/lib/slf4j-api-1.6.6.jar"/>
+    <pathelement location="${basedir}/lib/slf4j-simple-1.6.6.jar"/>
+    <pathelement location="${basedir}/lib/slick-util.jar"/>
+    <pathelement location="${basedir}/lib/slick.jar"/>
+  </path>
+  
+  <path id="youtube-tutorials.module.classpath">
+    <pathelement location="${youtube-tutorials.output.dir}"/>
+    <pathelement location="${basedir}/lib/jbox2d-library-2.1.2.2.jar"/>
+    <pathelement location="${basedir}/lib/jbullet.jar"/>
+    <pathelement location="${basedir}/lib/jdom-1.1.2.jar"/>
+    <pathelement location="${basedir}/lib/jinput.jar"/>
+    <pathelement location="${basedir}/lib/lwjgl.jar"/>
+    <pathelement location="${basedir}/lib/lwjgl_util.jar"/>
+    <pathelement location="${basedir}/lib/PNGDecoder.jar"/>
+    <pathelement location="${basedir}/lib/slf4j-api-1.6.6.jar"/>
+    <pathelement location="${basedir}/lib/slf4j-simple-1.6.6.jar"/>
+    <pathelement location="${basedir}/lib/slick-util.jar"/>
+    <pathelement location="${basedir}/lib/slick.jar"/>
+  </path>
+  
+  <path id="youtube-tutorials.runtime.module.classpath">
+    <pathelement location="${youtube-tutorials.testoutput.dir}"/>
+    <pathelement location="${youtube-tutorials.output.dir}"/>
+    <pathelement location="${basedir}/lib/jbox2d-library-2.1.2.2.jar"/>
+    <pathelement location="${basedir}/lib/jbullet.jar"/>
+    <pathelement location="${basedir}/lib/jdom-1.1.2.jar"/>
+    <pathelement location="${basedir}/lib/jinput.jar"/>
+    <pathelement location="${basedir}/lib/lwjgl.jar"/>
+    <pathelement location="${basedir}/lib/lwjgl_util.jar"/>
+    <pathelement location="${basedir}/lib/PNGDecoder.jar"/>
+    <pathelement location="${basedir}/lib/slf4j-api-1.6.6.jar"/>
+    <pathelement location="${basedir}/lib/slf4j-simple-1.6.6.jar"/>
+    <pathelement location="${basedir}/lib/slick-util.jar"/>
+    <pathelement location="${basedir}/lib/slick.jar"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.youtube-tutorials">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.youtube-tutorials">
+    <patternset refid="excluded.from.module.youtube-tutorials"/>
+  </patternset>
+  
+  <path id="youtube-tutorials.module.sourcepath">
+    <dirset dir="${module.youtube-tutorials.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.youtube-tutorials" depends="compile.module.youtube-tutorials.production,compile.module.youtube-tutorials.tests" description="Compile module Youtube-Tutorials"/>
+  
+  <target name="compile.module.youtube-tutorials.production" description="Compile module Youtube-Tutorials; production classes">
+    <mkdir dir="${youtube-tutorials.output.dir}"/>
+    <javac destdir="${youtube-tutorials.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
+      <compilerarg line="${compiler.args.youtube-tutorials}"/>
+      <bootclasspath refid="youtube-tutorials.module.bootclasspath"/>
+      <classpath refid="youtube-tutorials.module.production.classpath"/>
+      <src refid="youtube-tutorials.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.youtube-tutorials"/>
+    </javac>
+    
+    <copy todir="${youtube-tutorials.output.dir}">
+      <fileset dir="${module.youtube-tutorials.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.youtube-tutorials.tests" depends="compile.module.youtube-tutorials.production" description="compile module Youtube-Tutorials; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.youtube-tutorials" description="cleanup module">
+    <delete dir="${youtube-tutorials.output.dir}"/>
+    <delete dir="${youtube-tutorials.testoutput.dir}"/>
+  </target>
+</project>
